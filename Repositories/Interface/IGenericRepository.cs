@@ -18,6 +18,7 @@ namespace seguridad.api.Repositories.Interface
 
         Task<List<T>> ListAsync(ISpecification<T> spec);
         Task<List<T>> ListAsync();
+        Task SaveChangesAsync();
 
         Task<PaginatedResult<T>> ListAsync(ISpecification<T> spec, PaginationFilter pagination);
 

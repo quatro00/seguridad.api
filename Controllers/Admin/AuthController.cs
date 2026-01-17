@@ -6,9 +6,9 @@ using seguridad.api.Data;
 using seguridad.api.Models.Dto.Auth;
 using seguridad.api.Repositories.Interface;
 
-namespace seguridad.api.Controllers.Auth
+namespace seguridad.api.Controllers.Admin
 {
-    [Route("api/[controller]")]
+    [Route("api/admin/[controller]")]
     [ApiController]
     public class AuthController : ControllerBase
     {

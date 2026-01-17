@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using seguridad.api;
 using seguridad.api.Data;
+using seguridad.api.Middlewares;
 using seguridad.api.Repositories.Implementation;
 using seguridad.api.Repositories.Interface;
 
@@ -26,6 +27,8 @@ builder.Services.AddDbContext<AuthDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("SeguridadConnection"));
 });
 
+//builder.Services.AddScoped<GenericService>();
+builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 builder.Services.AddScoped<ITokenRepository, TokenRepository>();
 //builder.Services.AddScoped<IOrganizacionRepository, OrganizacionRepository>();
 //builder.Services.AddScoped<IConceptoRepository, ConceptoRepository>();
@@ -100,6 +103,7 @@ app.UseSwaggerUI();
     options.AllowAnyMethod();
 });*/
 app.UseCors("AllowAny");
+app.UseMiddleware<ExceptionMiddleware>();
 app.UseAuthentication();
 app.UseAuthorization();
 

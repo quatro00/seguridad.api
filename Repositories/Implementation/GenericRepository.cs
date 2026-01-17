@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using seguridad.api.Data;
 using seguridad.api.Models.Dto;
 using seguridad.api.Models.Interfaces;
 using seguridad.api.Repositories.Interface;
@@ -9,9 +10,9 @@ namespace seguridad.api.Repositories.Implementation
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
-        private readonly DbContext _context;
+        private readonly SeguridadContext _context;
         private readonly DbSet<T> _dbSet;
-        public GenericRepository(DbContext context)
+        public GenericRepository(SeguridadContext context)
         {
             _context = context;
             _dbSet = _context.Set<T>();
@@ -174,6 +175,11 @@ namespace seguridad.api.Repositories.Implementation
             }
 
             return await _context.SaveChangesAsync();
+        }
+
+        public async Task SaveChangesAsync()
+        {
+            await _context.SaveChangesAsync();
         }
     }
 }
